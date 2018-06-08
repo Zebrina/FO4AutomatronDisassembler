@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5953E125-1A57-49E1-BC79-26D7633A2533}</ProjectGuid>
     <RootNamespace>AutomatronRobotDisassembler</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -46,7 +46,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -88,12 +88,16 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <PostBuildEvent>
-      <Command>echo Copying DLL to Mod Organizer directory.
-xcopy "$(TargetPath)" "$(LOCALAPPDATA)\ModOrganizer\Fallout 4\mods\Automatron Disassembler\F4SE\Plugins\" /Y</Command>
+      <Command>xcopy "$(TargetPath)" "$(ProjectDir)Data\F4SE\Plugins\" /Y</Command>
+      <Message>Copying DLL to data directory.</Message>
     </PostBuildEvent>
     <Link>
       <ModuleDefinitionFile>Exports.def</ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>set mo2_target="$(LOCALAPPDATA)\ModOrganizer\Fallout 4\mods\$(SolutionName)_$(ProjectName)\"</Command>
+      <Message>Setting up link to Mod Organizer mod directory.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -126,9 +130,13 @@ xcopy "$(TargetPath)" "$(LOCALAPPDATA)\ModOrganizer\Fallout 4\mods\Automatron Di
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>echo Copying DLL to Mod Organizer directory.
-xcopy "$(TargetPath)" "$(LOCALAPPDATA)\ModOrganizer\Fallout 4\mods\Automatron Disassembler\F4SE\Plugins\" /Y</Command>
+      <Command>xcopy "$(TargetPath)" "$(ProjectDir)Data\F4SE\Plugins\" /Y</Command>
+      <Message>Copying DLL to data directory.</Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>set mo2_target="$(LOCALAPPDATA)\ModOrganizer\Fallout 4\mods\$(SolutionName)_$(ProjectName)\"</Command>
+      <Message>Setting up link to Mod Organizer mod directory.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
