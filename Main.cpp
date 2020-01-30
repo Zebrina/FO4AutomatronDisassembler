@@ -216,7 +216,7 @@ extern "C" {
 
 			return false;
 		}
-		else if (f4se->runtimeVersion != RUNTIME_VERSION_1_10_89) {
+		else if (f4se->runtimeVersion != CURRENT_RELEASE_RUNTIME) {
 			_MESSAGE("\tunsupported runtime version %08X", f4se->runtimeVersion);
 
 			return false;
